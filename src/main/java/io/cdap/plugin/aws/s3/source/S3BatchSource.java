@@ -32,6 +32,7 @@ import io.cdap.cdap.etl.api.batch.BatchSourceContext;
 import io.cdap.cdap.etl.api.connector.Connector;
 import io.cdap.plugin.aws.s3.common.S3ConnectorConfig;
 import io.cdap.plugin.aws.s3.common.S3Constants;
+import io.cdap.plugin.aws.s3.common.S3EmptyInputFormat;
 import io.cdap.plugin.aws.s3.common.S3Path;
 import io.cdap.plugin.aws.s3.connector.S3Connector;
 import io.cdap.plugin.common.Asset;
@@ -68,6 +69,11 @@ public class S3BatchSource extends AbstractFileSource<S3BatchSource.S3BatchConfi
   public S3BatchSource(S3BatchConfig config) {
     super(config);
     this.config = config;
+  }
+
+  @Override
+  protected String getEmptyInputFormatClassName() {
+    return S3EmptyInputFormat.class.getName();
   }
 
   @Override
